@@ -1,0 +1,8 @@
+#!/bin/bash
+sudo yum install -y httpd
+sudo service httpd start
+TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+sudo echo "<br/><h1 align='center' style='color:DeepSkyBlue;font-size:50px'>Welcome to DEL AWS Class</h1><br/><h2 align='center'>Hello there! from EC2 instance</h2><br/><h2 align='center' style='color:blue;font-size:50px'>$(curl -H "X-aws-ec2-metadata-token: $TOKEN" "http://169.254.169.254/latest/meta-data/instance-id")<br/>$(curl -H "X-aws-ec2-metadata-token: $TOKEN" "http://169.254.169.254/latest/meta-data//local-ipv4")</h2><br/><br/><h2><div id='curdt' align='center'></div></h2><script>var d = new Date(); document.getElementById('curdt').innerHTML=d;</script>" > /var/www/html/index.html
+
+MetaData v1 (IMDSv1)
+sudo echo "<br/><h1 align='center' style='color:DeepSkyBlue;font-size:50px'>Welcome to DevOps</h1><br/><h2 align='center'>Hello there! from EC2 instance</h2><br/><h2 align='center' style='color:blue;font-size:50px'>$(curl -s 'http://169.254.169.254/latest/meta-data/instance-id')<br/>$(curl -s 'http://169.254.169.254/latest/meta-data/local-ipv4')</h2><br/><br/><h2><div id='curdt' align='center'></div></h2><script>var d = new Date(); document.getElementById('curdt').innerHTML=d;</script>" > /var/www/html/index.html
